@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupo 3 - Física II</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Animaciones personalizadas */
+        .animate-scale-in {
+            animation: scale-in 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+        }
+
+        .animate-fade-in {
+            animation: fade-in 1s ease-out both;
+        }
+
+        .animate-fade-in-up {
+            animation: fade-in-up 1s ease-out both;
+        }
+
+        .animate-pulse-spin {
+            animation: pulse-spin 2s infinite ease-in-out;
+        }
+
+        .animate-fade-in-cards {
+            animation: fade-in 1s ease-out both;
+        }
+
+        @keyframes scale-in {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fade-in-up {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse-spin {
+            0% {
+                transform: rotate(0deg) scale(1);
+            }
+            50% {
+                transform: rotate(180deg) scale(1.1);
+            }
+            100% {
+                transform: rotate(360deg) scale(1);
+            }
+        }
+
+        .hover\:rotate-3d-y:hover {
+            transform: perspective(1000px) rotateY(10deg);
+        }
+
+        /* Estilos responsivos adicionales */
+        .content-container {
+            max-width: 1400px; /* Aumentar el max-width para 5 columnas */
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Ajustes para pantallas pequeñas */
+        @media (max-width: 768px) {
+            .logo-container {
+                position: relative !important;
+                top: 0 !important;
+                right: 0 !important;
+                text-align: center;
+                margin-bottom: 1rem;
+            }
+            
+            .main-title h1 {
+                font-size: 2.5rem !important;
+            }
+            
+            .main-title h2 {
+                font-size: 1.8rem !important;
+            }
+            
+            .access-button {
+                padding: 0.75rem 1.5rem !important;
+                font-size: 1rem !important;
+            }
+            
+            /* En pantallas pequeñas, mantiene 2 columnas o 1 */
+            .image-gallery {
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important; 
+                gap: 1.5rem !important;
+            }
+            
+            .image-card {
+                max-width: none;
+                margin: 0 auto;
+            }
+        }
+        
+        /* Ajustes para pantallas muy pequeñas */
+        @media (max-width: 480px) {
+             .image-gallery {
+                grid-template-columns: 1fr !important; /* 1 columna en pantallas muy pequeñas */
+                gap: 1.5rem !important;
+            }
+            .main-title h1 {
+                font-size: 2rem !important;
+            }
+            
+            .main-title h2 {
+                font-size: 1.5rem !important;
+            }
+            
+            .header-content h1 {
+                font-size: 2rem !important;
+            }
+            
+            .header-content p {
+                font-size: 1rem !important;
+            }
+        }
+
+        /* Media query para pantallas extra-grandes (XL), donde caben 5 */
+        @media (min-width: 1280px) {
+             .lg\:grid-cols-5 {
+                grid-template-columns: repeat(5, minmax(0, 1fr));
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-gray-200 min-h-screen overflow-x-hidden">
+    <div class="content-container">
+        <div class="logo-container py-4 text-center md:text-right md:absolute md:top-6 md:right-6 z-20">
+            <img src="imagenes/logo_nuevo.png" alt="Logo de la universidad" class="h-16 md:h-20 w-auto inline-block">
+        </div>
+
+        <div class="header-content relative z-10 text-center py-8 md:py-16 md:mb-20">
+            <div class="main-title mb-6 animate-scale-in">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-2">
+                    <i class="fas fa-atom animate-pulse-spin mr-2 md:mr-4"></i> Física II
+                </h1>
+                <h2 class="text-2xl md:text-3xl lg:text-4xl font-semibold text-green-500">
+                    Potencia y Energía Eléctrica
+                </h2>
+            </div>
+
+            <h1 class="text-3xl md:text-4xl font-bold text-green-500 mb-4 animate-scale-in" style="animation-delay: 0.5s;">
+                <i class="fas fa-users-cog text-4xl md:text-5xl animate-pulse-spin mr-2 md:mr-4"></i> Grupo 3
+            </h1>
+            <p class="text-lg md:text-xl max-w-xl mx-auto leading-relaxed mb-8 md:mb-10 animate-fade-in" style="animation-delay: 1s;">
+                ¡Bienvenidos a nuestro proyecto! Aquí presentamos el trabajo del <strong>Grupo 3</strong>, donde aplicamos nuestros
+                conocimientos en desarrollo web para crear herramientas útiles.
+            </p>
+        </div>
+
+        <main class="relative z-10 text-center mb-12 md:mb-20 animate-fade-in-up" style="animation-delay: 1.5s;">
+            <div class="inline-block relative text-left">
+                <button id="dropdown-button"
+                    class="access-button inline-flex items-center justify-center px-6 py-3 md:px-8 md:py-4 text-lg md:text-xl font-semibold text-white bg-green-500 rounded-full shadow-lg transition-transform transform hover:scale-105 active:scale-95 duration-300">
+                    <i class="fas fa-cogs mr-2 md:mr-3"></i>Fórmulas de Potencia<i class="fas fa-caret-down ml-2 md:ml-3"></i>
+                </button>
+                <div id="dropdown-menu"
+                    class="hidden absolute left-1/2 transform -translate-x-1/2 mt-2 w-56 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5 z-50">
+                    <div class="py-2 space-y-4" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-button">
+                        <a href="calculadora.html"
+                            class="block px-4 py-2 text-base md:text-lg font-bold text-gray-200 hover:bg-green-600 hover:text-white transition-colors"
+                            role="menuitem">
+                            P = V * I
+                        </a>
+                        <a href="calculadora2.html"
+                            class="block px-4 py-2 text-base md:text-lg font-bold text-gray-200 hover:bg-green-600 hover:text-white transition-colors"
+                            role="menuitem">
+                            P = I² * R
+                        </a>
+                        <a href="calculadora3.html"
+                            class="block px-4 py-2 text-base md:text-lg font-bold text-gray-200 hover:bg-green-600 hover:text-white transition-colors"
+                            role="menuitem">
+                            P = V² / R
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div class="text-center mb-8">
+            <h2 class="text-2xl md:text-3xl font-semibold text-white">Integrantes</h2>
+        </div>
+
+        <div class="image-gallery z-10 w-full p-4 md:p-6 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-4 md:gap-6 mb-12">
+            
+            <div class="image-card bg-gray-800 rounded-xl shadow-2xl p-3 md:p-4 transform transition-transform hover:rotate-3d-y animate-fade-in-cards"
+                style="animation-delay: 2s;">
+                <img src="imagenes/yocbims.jpg" alt="Yocbims Apaza Condori" class="rounded-lg w-full mb-2 object-cover" style="height: 160px; max-height: 200px;">
+                <p class="text-sm md:text-base font-medium text-green-400">Yocbims Apaza Condori</p>
+            </div>
+            
+            <div class="image-card bg-gray-800 rounded-xl shadow-2xl p-3 md:p-4 transform transition-transform hover:rotate-3d-y animate-fade-in-cards"
+                style="animation-delay: 2.3s;">
+                <img src="imagenes/willli.png" alt="Perea Tuamamna Wiliams" class="rounded-lg w-full mb-2 object-cover" style="height: 160px; max-height: 200px;">
+                <p class="text-sm md:text-base font-medium text-green-400">Perea Tuamamna Wiliams</p>
+            </div>
+            
+            <div class="image-card bg-gray-800 rounded-xl shadow-2xl p-3 md:p-4 transform transition-transform hover:rotate-3d-y animate-fade-in-cards"
+                style="animation-delay: 2.6s;">
+                <img src="imagenes/narro.jpg" alt="Narro Chuyo Stefany" class="rounded-lg w-full mb-2 object-cover" style="height: 160px; max-height: 200px;">
+                <p class="text-sm md:text-base font-medium text-green-400">Narro Chuyo Stefany</p>
+            </div>
+            
+            <div class="image-card bg-gray-800 rounded-xl shadow-2xl p-3 md:p-4 transform transition-transform hover:rotate-3d-y animate-fade-in-cards"
+                style="animation-delay: 2.9s;">
+                <img src="imagenes/Ever.png" alt="Hernandez Garcia Ever (1)" class="rounded-lg w-full mb-2 object-cover" style="height: 160px; max-height: 200px;">
+                <p class="text-sm md:text-base font-medium text-green-400">Hernandez Garcia Ever</p>
+            </div>
+
+            <div class="image-card bg-gray-800 rounded-xl shadow-2xl p-3 md:p-4 transform transition-transform hover:rotate-3d-y animate-fade-in-cards"
+                style="animation-delay: 3.2s;">
+                <img src="imagenes/5.png" alt="Quinto Integrante Nombre" class="rounded-lg w-full mb-2 object-cover" style="height: 160px; max-height: 200px;">
+                <p class="text-sm md:text-base font-medium text-green-400">Quinto Integrante Nombre</p>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Control del menú desplegable
+        document.getElementById('dropdown-button').addEventListener('click', function (e) {
+            e.stopPropagation();
+            var menu = document.getElementById('dropdown-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Ocultar el menú si se hace clic fuera de él
+        window.addEventListener('click', function (e) {
+            const dropdown = document.querySelector('.relative.inline-block');
+            if (!dropdown.contains(e.target)) {
+                document.getElementById('dropdown-menu').classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+
+</html>

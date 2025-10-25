@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Potencia y Energía Eléctrica.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-gray-900 text-gray-200 flex items-center justify-center min-h-screen p-6">
+
+    <div class="calculator-container bg-gray-800 rounded-2xl shadow-2xl p-8 w-full max-w-md">
+        <div class="text-center mb-6">
+            <h2 class="text-3xl font-bold text-green-500 mb-2">
+                <i class="fas fa-atom mr-2"></i> Calculadora
+            </h2>
+            <p class="text-3xl text-white">P = V * I</p>
+        </div>
+
+        <!-- Campos de entrada actualizados para Voltaje y Corriente -->
+        <div class="form-group mb-4">
+            <label for="voltaje" class="block text-gray-400 mb-1">Voltaje (V):</label>
+            <input type="text" id="voltaje" placeholder="Voltaje en Volts"
+                class="w-full bg-gray-700 text-white p-3 rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+                readonly>
+        </div>
+
+        <div class="form-group mb-6">
+            <label for="corriente" class="block text-gray-400 mb-1">Corriente (I):</label>
+            <input type="text" id="corriente" placeholder="Corriente en Amperios"
+                class="w-full bg-gray-700 text-white p-3 rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+                readonly>
+        </div>
+
+        <div class="keyboard grid grid-cols-4 gap-4">
+            <button
+                class="btn clear col-span-1 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg py-4 text-xl"
+                onclick="clearDisplay()">C</button>
+            <button class="btn bg-gray-700 hover:bg-gray-600 text-white font-bold rounded-lg py-4 text-xl"
+                onclick="appendNumber('7')">7</button>
+            <button class="btn bg-gray-700 hover:bg-gray-600 text-white font-bold rounded-lg py-4 text-xl"
+                onclick="appendNumber('8')">8</button>
+            <button class="btn bg-gray-700 hover:bg-gray-600 text-white font-bold rounded-lg py-4 text-xl"
+                onclick="appendNumber('9')">9</button>
+
+            <!-- Botones de modo actualizados -->
+            <button class="btn bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg py-4 text-sm"
+                onclick="setMode('voltaje')">Voltaje</button>
+            <button class="btn bg-gray-700 hover:bg-gray-600 text-white font-bold rounded-lg py-4 text-xl"
+                onclick="appendNumber('4')">4</button>
+            <button class="btn bg-gray-700 hover:bg-gray-600 text-white font-bold rounded-lg py-4 text-xl"
+                onclick="appendNumber('5')">5</button>
+            <button class="btn bg-gray-700 hover:bg-gray-600 text-white font-bold rounded-lg py-4 text-xl"
+                onclick="appendNumber('6')">6</button>
+
+            <button class="btn bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg py-4 text-sm"
+                onclick="setMode('corriente')">Corriente</button>
+            <button class="btn bg-gray-700 hover:bg-gray-600 text-white font-bold rounded-lg py-4 text-xl"
+                onclick="appendNumber('1')">1</button>
+            <button class="btn bg-gray-700 hover:bg-gray-600 text-white font-bold rounded-lg py-4 text-xl"
+                onclick="appendNumber('2')">2</button>
+            <button class="btn bg-gray-700 hover:bg-gray-600 text-white font-bold rounded-lg py-4 text-xl"
+                onclick="appendNumber('3')">3</button>
+
+            <!-- Botón de cálculo de potencia -->
+            <button
+                class="btn equal col-span-2 bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg py-4 text-xl"
+                onclick="calcularPotencia()">=</button>
+            <button class="btn col-span-2 bg-gray-700 hover:bg-gray-600 text-white font-bold rounded-lg py-4 text-xl"
+                onclick="appendNumber('0')">0</button>
+            <button class="btn bg-gray-700 hover:bg-gray-600 text-white font-bold rounded-lg py-4 text-xl"
+                onclick="appendNumber('.')">.</button>
+        </div>
+
+        <p class="resultado text-center text-xl font-bold text-green-400 mt-6" id="resultado"></p>
+    </div>
+
+    <script>
+        let mode = 'voltaje'; // Modo inicial para la entrada
+        const voltajeInput = document.getElementById('voltaje');
+        const corrienteInput = document.getElementById('corriente');
+        const resultadoDisplay = document.getElementById('resultado');
+
+        function clearDisplay() {
+            voltajeInput.value = '';
+            corrienteInput.value = '';
+            resultadoDisplay.textContent = '';
+            mode = 'voltaje';
+        }
+
+        function setMode(newMode) {
+            mode = newMode;
+        }
+
+        function appendNumber(number) {
+            if (mode === 'voltaje') {
+                voltajeInput.value += number;
+            } else if (mode === 'corriente') {
+                corrienteInput.value += number;
+            }
+        }
+
+        // Función para calcular la potencia
+        function calcularPotencia() {
+            const voltaje = parseFloat(voltajeInput.value);
+            const corriente = parseFloat(corrienteInput.value);
+
+            if (isNaN(voltaje) || isNaN(corriente)) {
+                resultadoDisplay.textContent = 'Ingrese valores válidos';
+                return;
+            }
+
+            const potencia = voltaje * corriente;
+            resultadoDisplay.textContent = `Potencia: ${potencia.toFixed(2)} W`;
+        }
+    </script>
+    <footer class="mt-8 text-center">
+        <a href="index.html"
+            class="inline-flex items-center justify-center px-6 py-3 text-lg font-semibold text-white bg-green-500 rounded-full shadow-lg transition-transform transform hover:scale-105 active:scale-95 duration-300">
+            <i class="fas fa-home mr-2"></i> Regresar al Inicio
+        </a>
+    </footer>
+</body>
+
+</html>
